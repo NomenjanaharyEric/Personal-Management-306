@@ -1,0 +1,43 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Gestion Personnel - Services{% endblock %}
+
+{% block body %}
+    <div class="container mt-3">
+        <h1>Services</h1>
+            {% for message in app.flashes('success') %}
+                <div class="mb-2 alert alert-success">
+                      {{ message }}  
+                </div>
+            {% endfor %}
+        <a href="{{ path('app_create_department') }}" class="btn btn-primary">Nouveau</a>
+        <table class=" mt-4 table table-hover table-bordered">
+            <thead>
+                <tr>
+                <th scope="col">Id</th>
+                <th scope="col">Departement</th>
+                <th scope="col">Nom</th>
+                <th scope="col">Date de Creation</th>
+                <th scope="col">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for service in services %}
+                    <tr class="table-light">
+                    <th scope="row">{{ service.id }}</th>
+                    <td>{{ service.department }}</td>
+                    <td>{{ service.name }}</td>
+                    <td>{{ service.createdAt | date('d-m-Y') }}</td>
+                    <td>
+                        <a href="{{ path('app_update_department', { id: service.id }) }}" class="btn btn-dark">Modifier</a>
+                        <a href="{{ path('app_delete_department', { id: service.id }) }}" class="btn btn-warning">Supprimer</a>
+                    </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <div class="navigation">
+            {{ knp_pagination_render(services) }}
+        </div>
+    </div>
+{% endblock %}
