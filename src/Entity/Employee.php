@@ -74,6 +74,11 @@ class Employee
     #[ORM\JoinColumn(nullable: false)]
     private ?Service $service = null;
 
+    public function __construct()
+    {
+        $this->dateOfBirth = new \DateTimeImmutable();
+    }
+
     public function getId(): ?int
     {
         return $this->id;
