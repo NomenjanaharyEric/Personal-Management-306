@@ -1,0 +1,23 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Gestion Personnel - Acceuil {% endblock %}
+
+{% block body %}
+  <div class="container col-xxl-8 px-4 py-5">
+      <div class="row flex-lg-row-reverse align-items-center g-5 py-5">
+        <div class="col-10 col-sm-8 col-lg-6">
+          <img src={{ asset('images/hero.png') }} class="d-block mx-lg-auto img-fluid" alt="Bootstrap Themes" width="700" height="500" loading="lazy">
+        </div>
+        <div class="col-lg-6">
+          <h1 class="display-5 fw-bold lh-1 mb-3">Automatisation de Gestion Personnel du Gouvernora Amoron'i Mania</h1>
+          <p class="lead">
+              Cette application permet d'enregistrer dans la base de donnée toutes informations conçernant les personnels.
+              Suivi de paiement de salaire, CNAPS, IRS et autre charge obligatoire de chaque personnel.
+          </p>
+          <div class="d-grid gap-2 d-md-flex justify-content-md-start">
+            <button type="button" class="btn btn-primary btn-lg px-4 me-md-2">Se connecter</button>
+          </div>
+        </div>
+      </div>
+  </div>
+{% endblock %}

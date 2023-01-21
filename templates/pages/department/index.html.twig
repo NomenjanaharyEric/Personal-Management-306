@@ -1,0 +1,29 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Gestion Personnel - Departement{% endblock %}
+
+{% block body %}
+    <div class="container mt-3">
+        <h1>Departements</h1>
+        <table class="table table-hover table-bordered">
+            <thead>
+                <tr>
+                <th scope="col">Id</th>
+                <th scope="col">Nom</th>
+                <th scope="col">Location</th>
+                <th scope="col">Date de Creation</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for department in departments %}
+                    <tr class="table-light">
+                    <th scope="row">{{ department.id }}</th>
+                    <td>{{ department.name }}</td>
+                    <td>{{ department.location }}</td>
+                    <td>{{ department.createdAt | date('d-m-Y') }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}
