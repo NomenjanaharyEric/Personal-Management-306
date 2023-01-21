@@ -5,7 +5,8 @@
 {% block body %}
     <div class="container mt-3">
         <h1>Departements</h1>
-        <table class="table table-hover table-bordered">
+
+        <table class=" mt-4 table table-hover table-bordered">
             <thead>
                 <tr>
                 <th scope="col">Id</th>
@@ -25,5 +26,8 @@
                 {% endfor %}
             </tbody>
         </table>
+        <div class="navigation">
+            {{ knp_pagination_render(departments) }}
+        </div>
     </div>
 {% endblock %}
