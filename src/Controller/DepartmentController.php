@@ -64,6 +64,14 @@ class DepartmentController extends AbstractController
         ]);
     }
 
+    /**
+     * This Methode allow us to update Department
+     *
+     * @param Department $department
+     * @param Request $request
+     * @param EntityManagerInterface $manager
+     * @return Response
+     */
     #[Route('/department/update-{id}', name:"app_update_department", methods:['GET', 'POST'])]
     public function update(Department $department, Request $request, EntityManagerInterface $manager):Response
     {
@@ -85,6 +93,13 @@ class DepartmentController extends AbstractController
         ]);
     }
 
+    /**
+     * This Methode allow us to delete Department by this ID
+     *
+     * @param Department $department
+     * @param EntityManagerInterface $manager
+     * @return Response
+     */
     #[Route('/department/delete-{id}', name:'app_delete_department', methods:['GET', 'POST'])]
     public function delete(Department $department, EntityManagerInterface $manager): Response
     {
