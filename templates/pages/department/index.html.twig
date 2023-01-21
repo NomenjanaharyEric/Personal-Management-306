@@ -5,7 +5,12 @@
 {% block body %}
     <div class="container mt-3">
         <h1>Departements</h1>
-
+            {% for message in app.flashes('success') %}
+                <div class="mb-2 alert alert-success">
+                      {{ message }}  
+                </div>
+            {% endfor %}
+        <a href="{{ path('app_create_department') }}" class="btn btn-primary">Nouveau</a>
         <table class=" mt-4 table table-hover table-bordered">
             <thead>
                 <tr>
@@ -13,6 +18,7 @@
                 <th scope="col">Nom</th>
                 <th scope="col">Location</th>
                 <th scope="col">Date de Creation</th>
+                <th scope="col">Actions</th>
                 </tr>
             </thead>
             <tbody>
@@ -22,6 +28,10 @@
                     <td>{{ department.name }}</td>
                     <td>{{ department.location }}</td>
                     <td>{{ department.createdAt | date('d-m-Y') }}</td>
+                    <td>
+                        <a href="{{ path('app_update_department', { id: department.id }) }}" class="btn btn-dark">Modifier</a>
+                        <a href="{{ path('app_delete_department', { id: department.id }) }}" class="btn btn-warning">Supprimer</a>
+                    </td>
                     </tr>
                 {% endfor %}
             </tbody>

@@ -18,7 +18,7 @@ class Department
 
     #[ORM\Column(length: 255)]
     #[Assert\NotNull()]
-    #[Assert\Length(6,255)]
+    #[Assert\Length(min:6, max:255)]
     private ?string $name = null;
 
     #[ORM\Column(length: 255)]
