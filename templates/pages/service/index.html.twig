@@ -10,7 +10,7 @@
                       {{ message }}  
                 </div>
             {% endfor %}
-        <a href="{{ path('app_create_department') }}" class="btn btn-primary">Nouveau</a>
+        <a href="{{ path('app_create_service') }}" class="btn btn-primary">Nouveau</a>
         <table class=" mt-4 table table-hover table-bordered">
             <thead>
                 <tr>
@@ -29,8 +29,8 @@
                     <td>{{ service.name }}</td>
                     <td>{{ service.createdAt | date('d-m-Y') }}</td>
                     <td>
-                        <a href="{{ path('app_update_department', { id: service.id }) }}" class="btn btn-dark">Modifier</a>
-                        <a href="{{ path('app_delete_department', { id: service.id }) }}" class="btn btn-warning">Supprimer</a>
+                        <a href="{{ path('app_update_service', { id: service.id }) }}" class="btn btn-dark">Modifier</a>
+                        <a href="{{ path('app_delete_service', { id: service.id }) }}" class="btn btn-warning">Supprimer</a>
                     </td>
                     </tr>
                 {% endfor %}
