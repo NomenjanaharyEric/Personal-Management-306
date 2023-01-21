@@ -20,7 +20,7 @@ class ServiceController extends AbstractController
         $services = $paginatorInterface->paginate(
             $serviceRepository->findAll(),
             $request->query->getInt("page", 1),
-            10
+            5
         );
 
         return $this->render('pages/service/index.html.twig', [

@@ -1,0 +1,48 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Gestion Personnel - Employée{% endblock %}
+
+{% block body %}
+    <div class="container mt-3">
+        <h1>Employées</h1>
+            {% for message in app.flashes('success') %}
+                <div class="mb-2 alert alert-success">
+                      {{ message }}  
+                </div>
+            {% endfor %}
+        <a href="{{ path('app_create_service') }}" class="btn btn-primary">Nouveau</a>
+        <table class=" mt-4 table table-hover table-bordered">
+            <thead>
+                <tr>
+                <th scope="col">Matricule</th>
+                <th scope="col">Nom</th>
+                <th scope="col">Prenom</th>
+                <th scope="col">Date de Naissance</th>
+                <th scope="col">Titre</th>
+                <th scope="col">Phone</th>
+                <th scope="col">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for employee in employees %}
+                    <tr class="table-light">
+                    <th scope="row">{{ employee.matricule }}</th>
+                    <td>{{ employee.name }}</td>
+                    <td>{{ employee.lastname }}</td>
+                    <td>{{ employee.dateOfBirth | date('d-m-Y') }}</td>
+                    <td>{{ employee.title }}</td>
+                    <td>{{ employee.phone }}</td>
+                    <td>
+                        <a href="{{ path('app_update_service', { id: employee.id }) }}" class="btn btn-success">Consulter</a>
+                        <a href="{{ path('app_update_service', { id: employee.id }) }}" class="btn btn-dark">Modifier</a>
+                        <a href="{{ path('app_delete_service', { id: employee.id }) }}" class="btn btn-warning">Supprimer</a>
+                    </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <div class="navigation">
+            {{ knp_pagination_render(employees) }}
+        </div>
+    </div>
+{% endblock %}
