@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\ServiceRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -28,9 +30,13 @@ class Service
     #[ORM\JoinColumn(nullable: false)]
     private ?Department $department = null;
 
+    #[ORM\OneToMany(mappedBy: 'service', targetEntity: Employee::class, orphanRemoval: true)]
+    private Collection $employees;
+
     public function __construct()
     {
         $this->createdAt = new \DateTimeImmutable();
+        $this->employees = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -72,5 +78,40 @@ class Service
         $this->department = $department;
 
         return $this;
+    }
+
+    /**
+     * @return Collection<int, Employee>
+     */
+    public function getEmployees(): Collection
+    {
+        return $this->employees;
+    }
+
+    public function addEmployee(Employee $employee): self
+    {
+        if (!$this->employees->contains($employee)) {
+            $this->employees->add($employee);
+            $employee->setService($this);
+        }
+
+        return $this;
+    }
+
+    public function removeEmployee(Employee $employee): self
+    {
+        if ($this->employees->removeElement($employee)) {
+            // set the owning side to null (unless already changed)
+            if ($employee->getService() === $this) {
+                $employee->setService(null);
+            }
+        }
+
+        return $this;
+    }
+
+    public function __toString(): String
+    {
+        return $this->getName();
     }
 }
