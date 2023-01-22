@@ -1,0 +1,44 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Gestion Personnel - Postes{% endblock %}
+
+{% block body %}
+    <div class="container mt-3">
+        <h1>Postes</h1>
+            {% for message in app.flashes('success') %}
+                <div class="mb-2 alert alert-success">
+                      {{ message }}  
+                </div>
+            {% endfor %}
+        <a href="{{ path('app_create_job') }}" class="btn btn-primary">Nouveau</a>
+        <table class=" mt-4 table table-hover table-bordered">
+            <thead>
+                <tr>
+                <th scope="col">Titre</th>
+                <th scope="col">Heure de travail</th>
+                <th scope="col">Salaire de Base</th>
+                <th scope="col">Description</th>
+                <th scope="col">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for job in jobs %}
+                    <tr class="table-light">
+                    <td>{{ job.title }}</td>
+                    <td>{{ job.workHours }}</td>
+                    <td>{{ job.baseSalary }}</td>
+                    <td>{{ job.description }}</td>
+                    <td>
+                        <a href="{{ path('app_show_job', { id: job.id }) }}" class="btn btn-success">Consulter</a>
+                        <a href="{{ path('app_update_job', { id: job.id }) }}" class="btn btn-dark">Modifier</a>
+                        <a href="{{ path('app_delete_job', { id: job.id }) }}" class="btn btn-warning">Supprimer</a>
+                    </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <div class="navigation">
+            {{ knp_pagination_render(jobs) }}
+        </div>
+    </div>
+{% endblock %}

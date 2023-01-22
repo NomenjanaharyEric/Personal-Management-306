@@ -1,0 +1,13 @@
+{% extends "base.html.twig" %}
+
+{% block title %}Gestion Personnel - Poste{% endblock %}
+
+{% block body %}
+    <div class="container mt-3">
+        <h1>Poste Information</h1>
+        <p> Titre : <strong>{{ job.title }}</strong> </p>
+        <p> Heure de travail par mois : <strong>{{ job.workHours }}</strong> </p>
+        <p> Salaire de base : <strong>{{ job.baseSalary }}</strong> </p>
+        <p> Description : <strong>{{ job.description }}</strong> </p>
+    </div>
+{% endblock %}
