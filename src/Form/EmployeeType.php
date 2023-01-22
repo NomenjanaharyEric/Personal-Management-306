@@ -126,20 +126,6 @@ class EmployeeType extends AbstractType
                     new Assert\Email()
                 ]
             ])
-            ->add('title',TextType::class, [
-                "attr" => [
-                    "class" => "form-control",
-                    "required" => true,
-                    "minlength" => "3",
-                    "maxlength" => "255"
-                ],
-                "label" => "Titre",
-                "label_attr" => ["class" => "form-label"],
-                "constraints" => [
-                    new Assert\NotNull(),
-                    new Assert\Length(["min" =>3, "max" => 255])
-                ]
-            ])
             ->add('service', EntityType::class, [
                 "class" => Service::class,
                 "attr" => ["class" => "form-control"],

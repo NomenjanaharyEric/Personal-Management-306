@@ -17,8 +17,7 @@
                 <th scope="col">Matricule</th>
                 <th scope="col">Nom</th>
                 <th scope="col">Prenom</th>
-                <th scope="col">Date de Naissance</th>
-                <th scope="col">Titre</th>
+                <th scope="col">Naissance</th>
                 <th scope="col">Phone</th>
                 <th scope="col">Actions</th>
                 </tr>
@@ -30,7 +29,6 @@
                     <td>{{ employee.name }}</td>
                     <td>{{ employee.lastname }}</td>
                     <td>{{ employee.dateOfBirth | date('d-m-Y') }}</td>
-                    <td>{{ employee.title }}</td>
                     <td>{{ employee.phone }}</td>
                     <td>
                         <a href="{{ path('app_show_employee', { id: employee.id }) }}" class="btn btn-success">Consulter</a>

@@ -33,10 +33,14 @@ class Service
     #[ORM\OneToMany(mappedBy: 'service', targetEntity: Employee::class, orphanRemoval: true)]
     private Collection $employees;
 
+    #[ORM\OneToMany(mappedBy: 'service', targetEntity: Job::class, orphanRemoval: true)]
+    private Collection $jobs;
+
     public function __construct()
     {
         $this->createdAt = new \DateTimeImmutable();
         $this->employees = new ArrayCollection();
+        $this->jobs = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -113,5 +117,35 @@ class Service
     public function __toString(): String
     {
         return $this->getName();
+    }
+
+    /**
+     * @return Collection<int, Job>
+     */
+    public function getJobs(): Collection
+    {
+        return $this->jobs;
+    }
+
+    public function addJob(Job $job): self
+    {
+        if (!$this->jobs->contains($job)) {
+            $this->jobs->add($job);
+            $job->setService($this);
+        }
+
+        return $this;
+    }
+
+    public function removeJob(Job $job): self
+    {
+        if ($this->jobs->removeElement($job)) {
+            // set the owning side to null (unless already changed)
+            if ($job->getService() === $this) {
+                $job->setService(null);
+            }
+        }
+
+        return $this;
     }
 }
