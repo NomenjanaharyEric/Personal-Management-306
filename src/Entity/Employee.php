@@ -8,6 +8,9 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Validator\Constraints as Assert;
 
 #[UniqueEntity("matricule")]
+#[UniqueEntity("cin")]
+#[UniqueEntity("email")]
+#[UniqueEntity("phone")]
 #[ORM\Entity(repositoryClass: EmployeeRepository::class)]
 class Employee
 {
@@ -17,7 +20,7 @@ class Employee
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
-    #[Assert\NotNull()]
+    #[Assert\NotBlank()]
     private ?string $matricule = null;
 
     #[ORM\Column(length: 255)]
@@ -31,7 +34,6 @@ class Employee
     private ?string $lastname = null;
 
     #[ORM\Column]
-    #[Assert\Date()]
     private ?\DateTimeImmutable $dateOfBirth = null;
 
     #[ORM\Column]
@@ -50,7 +52,6 @@ class Employee
 
     #[ORM\Column(length: 255)]
     #[Assert\NotNull()]
-    #[Assert\Unique()]
     #[Assert\Length(min:10, max:20)]
     private ?string $cin = null;
 
@@ -62,7 +63,6 @@ class Employee
     #[ORM\Column(length: 255)]
     #[Assert\NotNull()]
     #[Assert\Email()]
-    #[Assert\Unique()]
     private ?string $email = null;
 
     #[ORM\Column(length: 255)]
