@@ -50,8 +50,7 @@ class AppFixtures extends Fixture
                         ->setPhone($this->faker->phoneNumber())
                         ->setCin($this->faker->numberBetween(10000000000,999999999))
                         ->setFamilyStatus(mt_rand(0,1))
-                        ->setEmail($this->faker->email())
-                        ->setTitle($this->faker->title());
+                        ->setEmail($this->faker->email());
                     $service->addEmployee($employee);
                     $manager->persist($employee);
                 }

@@ -65,11 +65,6 @@ class Employee
     #[Assert\Email()]
     private ?string $email = null;
 
-    #[ORM\Column(length: 255)]
-    #[Assert\NotNull()]
-    #[Assert\Length(min:3, max:255)]
-    private ?string $title = null;
-
     #[ORM\ManyToOne(inversedBy: 'employees')]
     #[ORM\JoinColumn(nullable: false)]
     private ?Service $service = null;
