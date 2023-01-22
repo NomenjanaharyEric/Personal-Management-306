@@ -3,6 +3,7 @@
 namespace App\Form;
 
 use App\Entity\Employee;
+use App\Entity\Job;
 use App\Entity\Service;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
@@ -126,10 +127,10 @@ class EmployeeType extends AbstractType
                     new Assert\Email()
                 ]
             ])
-            ->add('service', EntityType::class, [
-                "class" => Service::class,
+            ->add('job', EntityType::class, [
+                "class" => Job::class,
                 "attr" => ["class" => "form-control"],
-                "label" => "Service",
+                "label" => "Poste à occuper",
                 "label_attr" => ["class" => "form-label"]
             ])
             ->add("submit", SubmitType::class, [
