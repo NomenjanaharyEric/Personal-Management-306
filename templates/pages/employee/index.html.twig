@@ -33,9 +33,9 @@
                     <td>{{ employee.title }}</td>
                     <td>{{ employee.phone }}</td>
                     <td>
-                        <a href="{{ path('app_update_service', { id: employee.id }) }}" class="btn btn-success">Consulter</a>
-                        <a href="{{ path('app_update_service', { id: employee.id }) }}" class="btn btn-dark">Modifier</a>
-                        <a href="{{ path('app_delete_service', { id: employee.id }) }}" class="btn btn-warning">Supprimer</a>
+                        <a href="{{ path('app_show_employee', { id: employee.id }) }}" class="btn btn-success">Consulter</a>
+                        <a href="{{ path('app_update_employee', { id: employee.id }) }}" class="btn btn-dark">Modifier</a>
+                        <a href="{{ path('app_delete_employee', { id: employee.id }) }}" class="btn btn-warning">Supprimer</a>
                     </td>
                     </tr>
                 {% endfor %}

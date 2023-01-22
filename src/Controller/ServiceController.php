@@ -14,6 +14,14 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class ServiceController extends AbstractController
 {
+    /**
+     * This methode allow us to get Services list with pagination
+     *
+     * @param ServiceRepository $serviceRepository
+     * @param PaginatorInterface $paginatorInterface
+     * @param Request $request
+     * @return Response
+     */
     #[Route(path: '/service', name: 'app_service', methods:['GET'])]
     public function index(ServiceRepository $serviceRepository, PaginatorInterface $paginatorInterface, Request $request): Response
     {
@@ -28,6 +36,13 @@ class ServiceController extends AbstractController
         ]);
     }
 
+    /**
+     * This methode allow us to create new service
+     *
+     * @param Request $request
+     * @param EntityManagerInterface $manager
+     * @return Response
+     */
     #[Route(path: '/service/create', name:'app_create_service', methods:["GET", "POST"])]
     public function create(Request $request, EntityManagerInterface $manager): Response
     {
@@ -50,6 +65,12 @@ class ServiceController extends AbstractController
         ]);
     }
 
+    /**
+     * This methode allow us to update servive
+     * @param Service $service
+     * @param Request $request
+     * @param EntityManagerInterface $manager
+     */
     #[Route(path: '/service/update-{id}', name:'app_update_service', methods:["GET", "POST"])]
     public function update(Service $service, Request $request, EntityManagerInterface $manager):Response
     {
@@ -70,6 +91,13 @@ class ServiceController extends AbstractController
         ]);
     }
 
+    /**
+     * This methode allow us to delete service by this ID
+     *
+     * @param Service $service
+     * @param EntityManagerInterface $manager
+     * @return Response
+     */
     #[Route(path: "/service/delete-{id}", name: 'app_delete_service', methods:["GET"])]
     public function delete(Service $service, EntityManagerInterface $manager):Response
     {

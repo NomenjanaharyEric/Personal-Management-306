@@ -1,0 +1,31 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Gestion Personnel - Employée{% endblock %}
+
+{% block body %}
+    <div class="container mt-3">
+        <h1>Employée Information</h1>
+        <table class=" mt-4 table table-hover table-bordered">
+            <thead>
+                <tr>
+                <th scope="col">Matricule</th>
+                <th scope="col">Nom</th>
+                <th scope="col">Prenom</th>
+                <th scope="col">Date de Naissance</th>
+                <th scope="col">Titre</th>
+                <th scope="col">Phone</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="table-light">
+                <th scope="row">{{ employee.matricule }}</th>
+                <td>{{ employee.name }}</td>
+                <td>{{ employee.lastname }}</td>
+                <td>{{ employee.dateOfBirth | date('d-m-Y') }}</td>
+                <td>{{ employee.title }}</td>
+                <td>{{ employee.phone }}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+{% endblock %}
