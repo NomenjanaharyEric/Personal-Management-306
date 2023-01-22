@@ -67,7 +67,7 @@ class Employee
 
     #[ORM\ManyToOne(inversedBy: 'employees')]
     #[ORM\JoinColumn(nullable: false)]
-    private ?Service $service = null;
+    private ?Job $job = null;
 
     public function __construct()
     {
@@ -199,14 +199,14 @@ class Employee
         return $this;
     }
 
-    public function getService(): ?Service
+    public function getJob(): ?Job
     {
-        return $this->service;
+        return $this->job;
     }
 
-    public function setService(?Service $service): self
+    public function setJob(?Job $job): self
     {
-        $this->service = $service;
+        $this->job = $job;
 
         return $this;
     }

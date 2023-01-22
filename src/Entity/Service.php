@@ -30,16 +30,12 @@ class Service
     #[ORM\JoinColumn(nullable: false)]
     private ?Department $department = null;
 
-    #[ORM\OneToMany(mappedBy: 'service', targetEntity: Employee::class, orphanRemoval: true)]
-    private Collection $employees;
-
     #[ORM\OneToMany(mappedBy: 'service', targetEntity: Job::class, orphanRemoval: true)]
     private Collection $jobs;
 
     public function __construct()
     {
         $this->createdAt = new \DateTimeImmutable();
-        $this->employees = new ArrayCollection();
         $this->jobs = new ArrayCollection();
     }
 
@@ -80,36 +76,6 @@ class Service
     public function setDepartment(?Department $department): self
     {
         $this->department = $department;
-
-        return $this;
-    }
-
-    /**
-     * @return Collection<int, Employee>
-     */
-    public function getEmployees(): Collection
-    {
-        return $this->employees;
-    }
-
-    public function addEmployee(Employee $employee): self
-    {
-        if (!$this->employees->contains($employee)) {
-            $this->employees->add($employee);
-            $employee->setService($this);
-        }
-
-        return $this;
-    }
-
-    public function removeEmployee(Employee $employee): self
-    {
-        if ($this->employees->removeElement($employee)) {
-            // set the owning side to null (unless already changed)
-            if ($employee->getService() === $this) {
-                $employee->setService(null);
-            }
-        }
 
         return $this;
     }
