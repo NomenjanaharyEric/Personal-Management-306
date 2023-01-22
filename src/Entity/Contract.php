@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use App\Repository\ContractRepository;
+use DateTimeImmutable;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
@@ -42,6 +43,11 @@ class Contract
     #[ORM\ManyToOne(inversedBy: 'contracts')]
     #[ORM\JoinColumn(nullable: false)]
     private ?Employee $employee = null;
+
+    public function __construct()
+    {
+        $this->createdAt = new DateTimeImmutable();
+    }
 
     public function getId(): ?int
     {

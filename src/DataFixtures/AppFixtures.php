@@ -2,10 +2,12 @@
 
 namespace App\DataFixtures;
 
+use App\Entity\Contract;
 use App\Entity\Department;
 use App\Entity\Employee;
 use App\Entity\Job;
 use App\Entity\Service;
+use DateTimeImmutable;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
 use Faker\Factory;
@@ -62,9 +64,21 @@ class AppFixtures extends Fixture
                             ->setCin($this->faker->numberBetween(10000000000,999999999))
                             ->setFamilyStatus(mt_rand(0,1))
                             ->setEmail($this->faker->email());
+
+                            // Creating contract
+                        $contract = new Contract();
+                        $contract
+                            ->setTitle(join(" ",$this->faker->words()))
+                            ->setStartDate(DateTimeImmutable::createFromMutable($this->faker->dateTimeBetween('-1 days', '+2 week')))
+                            ->setFinishedDate(DateTimeImmutable::createFromMutable($this->faker->dateTimeBetween('+2 week', '+1 years')))
+                            ->setType(mt_rand(0,1) ?  "CDD" :  "Stage")
+                            ->setStatus("en cours");
+
+                        $employee->addContract($contract);
                         
                         $job->addEmployee($employee);
 
+                        $manager->persist($contract);
                         $manager->persist($employee);
 
                     }
