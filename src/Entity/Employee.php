@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\EmployeeRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -69,9 +71,13 @@ class Employee
     #[ORM\JoinColumn(nullable: false)]
     private ?Job $job = null;
 
+    #[ORM\OneToMany(mappedBy: 'employee', targetEntity: Contract::class, orphanRemoval: true)]
+    private Collection $contracts;
+
     public function __construct()
     {
         $this->dateOfBirth = new \DateTimeImmutable();
+        $this->contracts = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -207,6 +213,36 @@ class Employee
     public function setJob(?Job $job): self
     {
         $this->job = $job;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Contract>
+     */
+    public function getContracts(): Collection
+    {
+        return $this->contracts;
+    }
+
+    public function addContract(Contract $contract): self
+    {
+        if (!$this->contracts->contains($contract)) {
+            $this->contracts->add($contract);
+            $contract->setEmployee($this);
+        }
+
+        return $this;
+    }
+
+    public function removeContract(Contract $contract): self
+    {
+        if ($this->contracts->removeElement($contract)) {
+            // set the owning side to null (unless already changed)
+            if ($contract->getEmployee() === $this) {
+                $contract->setEmployee(null);
+            }
+        }
 
         return $this;
     }
