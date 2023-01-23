@@ -80,6 +80,11 @@ class Employee
         $this->contracts = new ArrayCollection();
     }
 
+    public function __toString() : String
+    {
+        return $this->getName() . " " . $this->getLastname();
+    }
+
     public function getId(): ?int
     {
         return $this->id;

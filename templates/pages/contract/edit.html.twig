@@ -1,0 +1,14 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Gestion Personnel - Modifier contrat{% endblock %}
+
+{% block body %}
+    <div class="container mt-3">
+        <h1>Modification Contrat</h1>
+
+        {{ include('pages/contract/_form.html.twig', {'button_label': 'Update'}) }}
+
+        <a href="{{ path('app_contract_index') }}" class=" mt-2 btn btn-success">Annuler</a>
+
+    </div>
+{% endblock %}

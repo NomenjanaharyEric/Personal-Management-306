@@ -24,12 +24,10 @@ class Contract
     private ?\DateTimeImmutable $createdAt = null;
 
     #[ORM\Column]
-    #[Assert\DateTime()]
     #[Assert\NotNull()]
     private ?\DateTimeImmutable $startDate = null;
 
     #[ORM\Column(nullable: true)]
-    #[Assert\DateTime()]
     private ?\DateTimeImmutable $finishedDate = null;
 
     #[ORM\Column(length: 255)]

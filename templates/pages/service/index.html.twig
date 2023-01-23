@@ -11,7 +11,7 @@
                 </div>
             {% endfor %}
         <a href="{{ path('app_create_service') }}" class="btn btn-primary">Nouveau</a>
-        <table class=" mt-4 table table-hover table-bordered">
+        <table class=" mt-4 table table-bordered table-hover">
             <thead>
                 <tr>
                 <th scope="col">Id</th>
@@ -23,7 +23,7 @@
             </thead>
             <tbody>
                 {% for service in services %}
-                    <tr class="table-light">
+                    <tr>
                     <th scope="row">{{ service.id }}</th>
                     <td>{{ service.department }}</td>
                     <td>{{ service.name }}</td>

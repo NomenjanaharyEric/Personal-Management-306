@@ -1,0 +1,53 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Contract index{% endblock %}
+
+{% block body %}
+    <div class="container mt-3">
+        <h1>Contrats</h1>
+
+        <a href="{{ path('app_contract_new') }}" class="btn btn-primary">Créer </a>
+
+        <table class="mt-2 table table-hover table-bordered">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Titre</th>
+                    <th>Poste</th>
+                    <th>Employé</th>
+                    <th>Debut</th>
+                    <th>Expiration</th>
+                    <th>Type</th>
+                    <th>Status</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for contract in contracts %}
+                <tr>
+                    <td>{{ contract.id }}</td>
+                    <td>{{ contract.title }}</td>
+                    <td>{{ contract.employee.job }}</td>
+                    <td>{{ contract.title }}</td>
+                    <td>{{ contract.startDate ? contract.startDate|format_datetime('full','none',locale='fr')}}</td>
+                    <td>{{ contract.finishedDate ? contract.finishedDate| format_datetime('full','none',locale='fr') }}</td>
+                    <td>{{ contract.type }}</td>
+                    <td>{{ contract.status }}</td>
+                    <td class="d-flex flex-row justify-content-around">
+                        <a href="{{ path('app_contract_show', {'id': contract.id}) }}" class="m-1 btn btn-secondary">Voir detail</a>
+                        <a href="{{ path('app_contract_edit', {'id': contract.id}) }}" class="m-1 btn btn-dark btn-large">Modifier</a>
+                    </td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="8">no records found</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+        <div class="navigation">
+            {{ knp_pagination_render(contracts) }}
+        </div>
+    </div>
+    
+{% endblock %}
