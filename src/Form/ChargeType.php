@@ -6,7 +6,7 @@ use App\Entity\Charge;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\PercentType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
-use Symfony\Component\Form\Extension\Core\Type\TextareaType;
+use FOS\CKEditorBundle\Form\Type\CKEditorType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -34,7 +34,7 @@ class ChargeType extends AbstractType
                 "label_attr" => ["class" => "form-label"],
                 "attr" => ["class" => "form-control"]
             ])
-            ->add('avantages', TextareaType::class, [
+            ->add('avantages', CKEditorType::class, [
                 "label" => "Avantages",
                 "label_attr" => ["class" => "form-label"],
                 "attr" => ["class" => "form-control"]

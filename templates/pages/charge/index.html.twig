@@ -31,7 +31,7 @@
                     <td>{{ charge.partSalarial }}</td>
                     <td>{{ charge.employerContribution }}</td>
                     <td>{{ charge.createdAt | format_datetime('full','none', locale="fr") }}</td>
-                    <td>{{ charge.avantages }}</td>
+                    <td>{{ charge.avantages | raw }}</td>
                     <td class="d-flex justify-content-center">
                         <a href="{{ path('app_update_charge', { id: charge.id }) }}" class="m-1 btn btn-dark">Modifier</a>
                         <a href="{{ path('app_delete_charge', { id: charge.id }) }}" class="m-1 btn btn-warning">Supprimer</a>
