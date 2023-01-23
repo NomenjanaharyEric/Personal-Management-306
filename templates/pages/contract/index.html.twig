@@ -33,7 +33,7 @@
                     <td>{{ contract.finishedDate ? contract.finishedDate| format_datetime('full','none',locale='fr') }}</td>
                     <td>{{ contract.type }}</td>
                     <td>{{ contract.status }}</td>
-                    <td class="d-flex flex-row justify-content-around">
+                    <td class="d-flex justify-content-center">
                         <a href="{{ path('app_contract_show', {'id': contract.id}) }}" class="m-1 btn btn-secondary">Voir detail</a>
                         <a href="{{ path('app_contract_edit', {'id': contract.id}) }}" class="m-1 btn btn-dark btn-large">Modifier</a>
                     </td>

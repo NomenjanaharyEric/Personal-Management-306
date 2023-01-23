@@ -30,10 +30,10 @@
                     <td>{{ employee.lastname }}</td>
                     <td>{{ employee.dateOfBirth | date('d-m-Y') }}</td>
                     <td>{{ employee.phone }}</td>
-                    <td>
-                        <a href="{{ path('app_show_employee', { id: employee.id }) }}" class="btn btn-success">Consulter</a>
-                        <a href="{{ path('app_update_employee', { id: employee.id }) }}" class="btn btn-dark">Modifier</a>
-                        <a href="{{ path('app_delete_employee', { id: employee.id }) }}" class="btn btn-warning">Supprimer</a>
+                    <td class="d-flex justify-content-center">
+                        <a href="{{ path('app_show_employee', { id: employee.id }) }}" class="m-1 btn btn-success">Consulter</a>
+                        <a href="{{ path('app_update_employee', { id: employee.id }) }}" class="m-1 btn btn-dark">Modifier</a>
+                        <a href="{{ path('app_delete_employee', { id: employee.id }) }}" class="m-1 btn btn-warning">Supprimer</a>
                     </td>
                     </tr>
                 {% endfor %}

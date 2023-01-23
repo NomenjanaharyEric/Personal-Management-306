@@ -28,10 +28,10 @@
                     <td>{{ job.workHours }}</td>
                     <td>{{ job.baseSalary }}</td>
                     <td>{{ job.description }}</td>
-                    <td>
-                        <a href="{{ path('app_show_job', { id: job.id }) }}" class="btn btn-success">Consulter</a>
-                        <a href="{{ path('app_update_job', { id: job.id }) }}" class="btn btn-dark">Modifier</a>
-                        <a href="{{ path('app_delete_job', { id: job.id }) }}" class="btn btn-warning">Supprimer</a>
+                    <td class="d-flex justify-content-center">
+                        <a href="{{ path('app_show_job', { id: job.id }) }}" class="m-1 btn btn-success">Consulter</a>
+                        <a href="{{ path('app_update_job', { id: job.id }) }}" class="m-1 btn btn-dark">Modifier</a>
+                        <a href="{{ path('app_delete_job', { id: job.id }) }}" class="m-1 btn btn-warning">Supprimer</a>
                     </td>
                     </tr>
                 {% endfor %}

@@ -27,10 +27,10 @@
                     <th scope="row">{{ department.id }}</th>
                     <td>{{ department.name }}</td>
                     <td>{{ department.location }}</td>
-                    <td>{{ department.createdAt | date('d-m-Y') }}</td>
-                    <td>
-                        <a href="{{ path('app_update_department', { id: department.id }) }}" class="btn btn-dark">Modifier</a>
-                        <a href="{{ path('app_delete_department', { id: department.id }) }}" class="btn btn-warning">Supprimer</a>
+                    <td>{{ department.createdAt | format_datetime('full','none', locale="fr") }}</td>
+                    <td class="d-flex justify-content-center">
+                        <a href="{{ path('app_update_department', { id: department.id }) }}" class="m-1 btn btn-dark">Modifier</a>
+                        <a href="{{ path('app_delete_department', { id: department.id }) }}" class="m-1 btn btn-warning">Supprimer</a>
                     </td>
                     </tr>
                 {% endfor %}
