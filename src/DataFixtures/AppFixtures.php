@@ -2,6 +2,7 @@
 
 namespace App\DataFixtures;
 
+use App\Entity\Charge;
 use App\Entity\Contract;
 use App\Entity\Department;
 use App\Entity\Employee;
@@ -71,11 +72,26 @@ class AppFixtures extends Fixture
                             ->setTitle(join(" ",$this->faker->words()))
                             ->setStartDate(DateTimeImmutable::createFromMutable($this->faker->dateTimeBetween('-1 days', '+2 week')))
                             ->setFinishedDate(DateTimeImmutable::createFromMutable($this->faker->dateTimeBetween('+2 week', '+1 years')))
-                            ->setType(mt_rand(0,1) ?  "CDD" :  "Stage")
-                            ->setStatus("en cours");
+                            ->setType(mt_rand(0,1) ?  "CDD" :  "STAGE")
+                            ->setStatus("EN COURS");
 
+                            // create Charge
+                            for ($m=0; $m < mt_rand(1,3) ; $m++) { 
+                                $charge = new Charge();
+
+                                $charge
+                                    ->setTitle(join(" ",$this->faker->words()))
+                                    ->setPartSalarial(1.0)
+                                    ->setEmployerContribution(1)
+                                    ->setAvantages($this->faker->paragraph());
+                                
+                                    $contract->addCharge($charge);
+
+                                    $manager->persist($charge);
+                            }
+
+                            
                         $employee->addContract($contract);
-                        
                         $job->addEmployee($employee);
 
                         $manager->persist($contract);
