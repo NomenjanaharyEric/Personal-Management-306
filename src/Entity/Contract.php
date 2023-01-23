@@ -47,10 +47,14 @@ class Contract
     #[ORM\ManyToMany(targetEntity: Charge::class, mappedBy: 'contracts')]
     private Collection $charges;
 
+    #[ORM\ManyToMany(targetEntity: Tax::class)]
+    private Collection $taxes;
+
     public function __construct()
     {
         $this->createdAt = new DateTimeImmutable();
         $this->charges = new ArrayCollection();
+        $this->taxes = new ArrayCollection();
     }
 
     public function __toString(): String
@@ -170,6 +174,30 @@ class Contract
         if ($this->charges->removeElement($charge)) {
             $charge->removeContract($this);
         }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Tax>
+     */
+    public function getTaxes(): Collection
+    {
+        return $this->taxes;
+    }
+
+    public function addTax(Tax $tax): self
+    {
+        if (!$this->taxes->contains($tax)) {
+            $this->taxes->add($tax);
+        }
+
+        return $this;
+    }
+
+    public function removeTax(Tax $tax): self
+    {
+        $this->taxes->removeElement($tax);
 
         return $this;
     }
