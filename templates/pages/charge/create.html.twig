@@ -1,0 +1,22 @@
+{% extends "base.html.twig" %}
+
+{% block title %}Créer nouveau charge{% endblock %}
+
+{% block body %}
+    <div class="container mt-4">
+        <h1>Creation nouveau charge</h1>
+        {{ form_start(form) }}
+            <div class="row">
+                <div class="col-md-12">
+                    {{ form_row(form.title)}}
+                </div>
+                <div class="col-md-6">
+                    {{ form_row(form.partSalarial)}}
+                </div>
+                <div class="col-md-6">
+                    {{ form_row(form.employerContribution)}}
+                </div>
+            </div>
+        {{ form_end(form) }}
+    </div>
+{% endblock %}

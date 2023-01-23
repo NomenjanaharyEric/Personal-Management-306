@@ -53,6 +53,11 @@ class Contract
         $this->charges = new ArrayCollection();
     }
 
+    public function __toString(): String
+    {
+        return $this->getTitle();
+    }
+
     public function getId(): ?int
     {
         return $this->id;
