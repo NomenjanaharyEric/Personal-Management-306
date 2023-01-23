@@ -2,41 +2,43 @@
 
 namespace App\Form;
 
-use App\Entity\Charge;
+use App\Entity\Tax;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\PercentType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
-use FOS\CKEditorBundle\Form\Type\CKEditorType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class ChargeType extends AbstractType
+class TaxType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
             ->add('title', TextType::class, [
-                "label" => "Titre",
-                "label_attr" => ["class" => "form-label"],
                 "attr" => [
                     "class" => "form-control"
-                ]
-
+                ],
+                "label" => "Titre",
+                "label_attr" => ["class" => "form-label"]
             ])
-            ->add('partSalarial', PercentType::class, [
-                "label" => "Part Salarial",
-                "label_attr" => ["class" => "form-label"],
-                "attr" => ["class" => "form-control"],
+            ->add('sigle', TextType::class, [
+                "attr" => [
+                    "class" => "form-control"
+                ],
+                "label" => "Sigle",
+                "label_attr" => ["class" => "form-label"]
             ])
-            ->add('employerContribution', PercentType::class, [
-                "label" => "Part Patronale",
+            ->add('description', TextareaType::class, [
+                "label" => "Description",
                 "label_attr" => ["class" => "form-label"],
                 "attr" => ["class" => "form-control"]
             ])
-            ->add('avantages', CKEditorType::class, [
-                "label" => "Avantages",
+            ->add('percentage', PercentType::class, [
+                "label" => "Taxe à payé",
                 "label_attr" => ["class" => "form-label"],
+                "attr" => ["class" => "form-control"]
             ])
             ->add("submit", SubmitType::class, [
                 "attr" => ["class" => "mt-2 btn btn-primary"],
@@ -48,7 +50,7 @@ class ChargeType extends AbstractType
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
-            'data_class' => Charge::class,
+            'data_class' => Tax::class,
         ]);
     }
 }

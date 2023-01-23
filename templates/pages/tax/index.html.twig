@@ -1,0 +1,45 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Gestion Personnel - Taxes{% endblock %}
+
+{% block body %}
+    <div class="container mt-3">
+        <h1>Taxes</h1>
+            {% for message in app.flashes('success') %}
+                <div class="mb-2 alert alert-success">
+                      {{ message }}  
+                </div>
+            {% endfor %}
+        <a href="{{ path('app_create_tax') }}" class="btn btn-primary">Nouveau</a>
+        <table class=" mt-4 table table-bordered table-hover">
+            <thead>
+                <tr>
+                <th scope="col">Id</th>
+                <th scope="col">Titre</th>
+                <th scope="col">Sigle</th>
+                <th scope="col">Description</th>
+                <th scope="col">Taux</th>
+                <th scope="col">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for tax in taxes %}
+                    <tr>
+                    <th scope="row">{{ tax.id }}</th>
+                    <td>{{ tax.title }}</td>
+                    <td>{{ tax.sigle }}</td>
+                    <td>{{ tax.description }}</td>
+                    <td>{{ tax.percentage }}</td>
+                    <td class="d-flex justify-content-center">
+                        <a href="{{ path('app_update_tax', { id: tax.id }) }}" class="m-1 btn btn-dark">Modifier</a>
+                        <a href="{{ path('app_delete_tax', { id: tax.id }) }}" class="m-1 btn btn-warning">Supprimer</a>
+                    </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <div class="navigation">
+            {{ knp_pagination_render(taxes) }}
+        </div>
+    </div>
+{% endblock %}
