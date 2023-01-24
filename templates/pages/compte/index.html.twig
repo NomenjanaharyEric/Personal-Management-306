@@ -1,20 +1,43 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello CompteController!{% endblock %}
+{% block title %}Comptes {% endblock %}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
-
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
-
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code><a href="{{ 'E:/gestionPersonnel/src/Controller/CompteController.php'|file_link(0) }}">src/Controller/CompteController.php</a></code></li>
-        <li>Your template at <code><a href="{{ 'E:/gestionPersonnel/templates/compte/index.html.twig'|file_link(0) }}">templates/compte/index.html.twig</a></code></li>
-    </ul>
-</div>
+    <div class="container mt-3">
+        <h1>Comptes bancaire des Employées</h1>
+            {% for message in app.flashes('success') %}
+                <div class="mb-2 alert alert-success">
+                      {{ message }}  
+                </div>
+            {% endfor %}
+        <a href="{{ path('app_create_compte') }}" class="btn btn-primary">Nouveau</a>
+        <table class=" mt-4 table table-bordered table-hover">
+            <thead>
+                <tr>
+                <th scope="col">Id</th>
+                <th scope="col">numero</th>
+                <th scope="col">solde</th>
+                <th scope="col">Date de Creation</th>
+                <th scope="col">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for compte in comptes %}
+                    <tr>
+                    <th scope="row">{{ compte.id }}</th>
+                    <td>{{ compte.numero }}</td>
+                    <td>{{ compte.solde }}</td>
+                    <td>{{ compte.createdAt | format_datetime('full', 'none', locale="fr")}}</td>
+                    <td class="d-flex justify-content-center">
+                        <a href="{{ path('app_update_compte', { id: compte.id }) }}" class="m-1 btn btn-dark">Modifier</a>
+                        <a href="{{ path('app_delete_compte', { id: compte.id }) }}" class="m-1 btn btn-warning">Supprimer</a>
+                    </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <div class="navigation">
+            {{ knp_pagination_render(comptes) }}
+        </div>
+    </div>
 {% endblock %}
