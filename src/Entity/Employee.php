@@ -74,6 +74,9 @@ class Employee
     #[ORM\OneToMany(mappedBy: 'employee', targetEntity: Contract::class, orphanRemoval: true)]
     private Collection $contracts;
 
+    #[ORM\OneToOne(mappedBy: 'owner', cascade: ['persist', 'remove'])]
+    private ?Compte $compte = null;
+
     public function __construct()
     {
         $this->dateOfBirth = new \DateTimeImmutable();
@@ -248,6 +251,23 @@ class Employee
                 $contract->setEmployee(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getCompte(): ?Compte
+    {
+        return $this->compte;
+    }
+
+    public function setCompte(Compte $compte): self
+    {
+        // set the owning side of the relation if necessary
+        if ($compte->getOwner() !== $this) {
+            $compte->setOwner($this);
+        }
+
+        $this->compte = $compte;
 
         return $this;
     }

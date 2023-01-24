@@ -24,7 +24,7 @@ class Tax
 
     #[ORM\Column(length: 255)]
     #[Assert\NotNull()]
-    #[Assert\Length(min:3, max:255)]
+    #[Assert\Length(min:2, max:255)]
     private ?string $sigle = null;
 
     #[ORM\Column(type: Types::TEXT, nullable: true)]
@@ -34,6 +34,11 @@ class Tax
     #[Assert\NotNull()]
     #[Assert\Positive()]
     private ?float $percentage = null;
+
+    public function __toString(): String
+    {
+        return $this->getTitle();
+    }
 
     public function getId(): ?int
     {

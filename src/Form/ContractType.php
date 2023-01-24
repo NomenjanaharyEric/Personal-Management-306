@@ -2,8 +2,10 @@
 
 namespace App\Form;
 
+use App\Entity\Charge;
 use App\Entity\Contract;
 use App\Entity\Employee;
+use App\Entity\Tax;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
@@ -72,8 +74,26 @@ class ContractType extends AbstractType
                 "label" => "Employée",
                 "label_attr" => ["class" => "form-label"]
             ])
+            ->add("charges", EntityType::class,[
+                "class" => Charge::class,
+                "multiple" => true,
+                "expanded" => true,
+                "label" => "Charges",
+                "required" => false,
+                "attr" => ["class" => "form-check"],
+                "label_attr" => ["class" => "form-check-label"],
+            ])
+            ->add("taxes", EntityType::class,[
+                "class" => Tax::class,
+                "multiple" => true,
+                "expanded" => true,
+                "label" => "Taxes",
+                "required" => false,
+                "attr" => ["class" => "form-check"],
+                "label_attr" => ["class" => "form-check-label"],
+            ])
             ->add("submit", SubmitType::class, [
-                "attr" => ["class" => "mt-2 btn btn-primary"],
+                "attr" => ["class" => "btn btn-primary"],
                 "label" => "Enregistrer"
             ])
         ;

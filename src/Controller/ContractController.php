@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Contract;
 use App\Form\ContractType;
 use App\Repository\ContractRepository;
+use Doctrine\ORM\EntityManagerInterface;
 use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -40,17 +41,19 @@ class ContractController extends AbstractController
      * This Methode Allow Us To Create New Contract
      *
      * @param Request $request
-     * @param ContractRepository $contractRepository
+     * @param EntityManagerInterface $manager
      * @return Response
      */
-    public function new(Request $request, ContractRepository $contractRepository): Response
+    public function new(Request $request, EntityManagerInterface $manager): Response
     {
         $contract = new Contract();
         $form = $this->createForm(ContractType::class, $contract);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $contractRepository->save($contract, true);
+            $contract = $form->getData();
+            $manager->persist($contract);
+            $manager->flush();
 
             $this->addFlash("success", "Nouveau contrat enregistrer");
 

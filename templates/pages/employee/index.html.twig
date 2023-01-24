@@ -19,6 +19,7 @@
                 <th scope="col">Prenom</th>
                 <th scope="col">Naissance</th>
                 <th scope="col">Phone</th>
+                <th scope="col">Poste</th>
                 <th scope="col">Actions</th>
                 </tr>
             </thead>
@@ -28,8 +29,9 @@
                     <th scope="row">{{ employee.matricule }}</th>
                     <td>{{ employee.name }}</td>
                     <td>{{ employee.lastname }}</td>
-                    <td>{{ employee.dateOfBirth | date('d-m-Y') }}</td>
+                    <td>{{ employee.dateOfBirth | format_datetime('full','none',locale="fr") }}</td>
                     <td>{{ employee.phone }}</td>
+                    <td>{{ employee.job }}</td>
                     <td class="d-flex justify-content-center">
                         <a href="{{ path('app_show_employee', { id: employee.id }) }}" class="m-1 btn btn-success">Consulter</a>
                         <a href="{{ path('app_update_employee', { id: employee.id }) }}" class="m-1 btn btn-dark">Modifier</a>
