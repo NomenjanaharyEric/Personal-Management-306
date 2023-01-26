@@ -42,12 +42,8 @@ class Charge
     #[Assert\Length(min:10)]
     private ?string $avantages = null;
 
-    #[ORM\ManyToMany(targetEntity: Contract::class, inversedBy: 'charges')]
-    private Collection $contracts;
-
     public function __construct()
     {
-        $this->contracts = new ArrayCollection();
         $this->createdAt = new \DateTimeImmutable();
     }
 
@@ -121,27 +117,4 @@ class Charge
         return $this;
     }
 
-    /**
-     * @return Collection<int, Contract>
-     */
-    public function getContracts(): Collection
-    {
-        return $this->contracts;
-    }
-
-    public function addContract(Contract $contract): self
-    {
-        if (!$this->contracts->contains($contract)) {
-            $this->contracts->add($contract);
-        }
-
-        return $this;
-    }
-
-    public function removeContract(Contract $contract): self
-    {
-        $this->contracts->removeElement($contract);
-
-        return $this;
-    }
 }

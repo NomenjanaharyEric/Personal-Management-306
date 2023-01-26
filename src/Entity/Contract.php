@@ -44,7 +44,7 @@ class Contract
     #[ORM\JoinColumn(nullable: false)]
     private ?Employee $employee = null;
 
-    #[ORM\ManyToMany(targetEntity: Charge::class, mappedBy: 'contracts')]
+    #[ORM\ManyToMany(targetEntity: Charge::class)]
     private Collection $charges;
 
     #[ORM\ManyToMany(targetEntity: Tax::class)]
@@ -157,25 +157,6 @@ class Contract
     public function getCharges(): Collection
     {
         return $this->charges;
-    }
-
-    public function addCharge(Charge $charge): self
-    {
-        if (!$this->charges->contains($charge)) {
-            $this->charges->add($charge);
-            $charge->addContract($this);
-        }
-
-        return $this;
-    }
-
-    public function removeCharge(Charge $charge): self
-    {
-        if ($this->charges->removeElement($charge)) {
-            $charge->removeContract($this);
-        }
-
-        return $this;
     }
 
     /**

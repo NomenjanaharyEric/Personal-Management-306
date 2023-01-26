@@ -39,6 +39,8 @@ class ContractRepository extends ServiceEntityRepository
         }
     }
 
+    
+
 //    /**
 //     * @return Contract[] Returns an array of Contract objects
 //     */

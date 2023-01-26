@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Paiement Salaire{% endblock %}
+
+{% block body %}
+    <div class="container mt-3">
+        <h1>Liste employé sous contrat</h1>
+
+        <table class="mt-2 table table-hover table-bordered">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Titre Contrat</th>
+                    <th>Proprietaire</th>
+                    <th>Charges</th>
+                    <th>Taxes</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for employee in employees %}
+            
+                {{ dump(employee) }}
+
+                <tr>
+                    <td>{{ employee.id }}</td>
+                    <td>{{ employee.title }}</td>
+                    <td>{{ employee.employee }}</td>
+                    {# <td>{{ employee.charges.title }}</td> #}
+                    {# <td>{{ employee.charges }}</td> #}
+                    {# <td>{{ employee.taxes }}</td> #}
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="8">no records found</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    
+{% endblock %}
