@@ -2,8 +2,11 @@
 
 namespace App\Repository;
 
+use App\Entity\Charge;
 use App\Entity\Contract;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\Query\AST\Join;
+use Doctrine\ORM\Query\Expr;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
@@ -37,6 +40,18 @@ class ContractRepository extends ServiceEntityRepository
         if ($flush) {
             $this->getEntityManager()->flush();
         }
+    }
+
+    public function getEmployeeUnderContract(string $status)
+    {
+        $query = $this->createQueryBuilder('c')
+                    ->addSelect('e')
+                    ->leftJoin('c.employee', 'e')
+                    ->where('c.status = :status')
+                    ->setParameter('status', $status)
+                    ->getQuery();
+
+        return $query->getResult();
     }
 
     

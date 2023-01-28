@@ -39,34 +39,6 @@ class EmployeeRepository extends ServiceEntityRepository
         }
     }
 
-    public function findEmployeesUnderContract()
-    {
-        $entityManager = $this->getEntityManager();
-
-        $query = $entityManager->createQuery(
-            "SELECT con
-                FROM App\Entity\Contract con
-                    LEFT JOIN con.employee emp
-                    LEFT JOIN con.taxes tx
-                    -- LEFT JOIN con.taxes tax
-                WHERE con.status = 'NOUVEAU'
-                AND con.taxes = tx.id
-                AND con.employee = emp.id
-                "
-        );
-        // $entityManager = $this->getEntityManager();
-
-        // $query = $entityManager->createQuery(
-        //     "SELECT con, emp,
-        //     FROM App\Entity\Contract con
-        //     LEFT JOIN con.employee emp
-        //     WHERE con.status = 'NOUVEAU'
-        //     AND con.employee = emp.id"
-        // );
-
-        return $query->getResult();
-    }
-
 
 //    /**
 //     * @return Employee[] Returns an array of Employee objects
