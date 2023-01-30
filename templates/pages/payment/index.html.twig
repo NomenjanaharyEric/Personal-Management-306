@@ -15,22 +15,29 @@
                     <th>Type</th>
                     <th>Charges</th>
                     <th>Taxes</th>
+                    <th>Action</th>
                 </tr>
             </thead>
             <tbody>
             {% for employee in employees %}
-            
-                {{ dump(employee) }}
-
                 <tr>
                     <td>{{ employee.id }}</td>
                     <td>{{ employee.title }}</td>
                     <td>{{ employee.employee }}</td>
                     <td>{{ employee.type }}</td>
-                    {# <td>{{ employee.taxes }}</td> #}
-                    {# <td>{{ employee.charges.title }}</td> #}
-                    {# <td>{{ employee.charges }}</td> #}
-                    {# <td>{{ employee.taxes }}</td> #}
+                    <td>
+                        {% for charge in employee.charges %}
+                            {{ charge }}
+                        {% endfor %}
+                    </td>
+                    <td>
+                        {% for tax in employee.taxes %}
+                            {{ tax }} </br>
+                        {% endfor %}
+                    </td>
+                    <td>
+                        <a href="{{ path('app_payment_show', {"id": employee.id }) }}" class="btn btn-info">Payer</a>
+                    </td>
                 </tr>
             {% else %}
                 <tr>

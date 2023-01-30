@@ -160,6 +160,34 @@ class Contract
     }
 
     /**
+     *
+     * @param Charge $charge
+     * @return self
+     */
+    public function addCharge(Charge $charge): self
+    {
+        if (!$this->charges->contains($charge)) {
+            $this->charges->add($charge);
+        }
+
+        return $this;
+    }
+
+    /**
+     *
+     * @param Charge $charge
+     * @return self
+     */
+    public function removeCharge(Charge $charge): self
+    {
+        $this->charges->removeElement($charge);
+
+        return $this;
+    }
+
+    
+
+    /**
      * @return Collection<int, Tax>
      */
     public function getTaxes(): Collection

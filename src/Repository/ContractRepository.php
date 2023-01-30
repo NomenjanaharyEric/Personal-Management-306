@@ -45,13 +45,41 @@ class ContractRepository extends ServiceEntityRepository
     public function getEmployeeUnderContract(string $status)
     {
         $query = $this->createQueryBuilder('c')
-                    ->addSelect('e')
-                    ->leftJoin('c.employee', 'e')
                     ->where('c.status = :status')
                     ->setParameter('status', $status)
                     ->getQuery();
 
         return $query->getResult();
+    }
+
+    public function getChargesByContract(Int $idContract)
+    {
+        $conn = $this->getEntityManager()->getConnection();
+
+        $sql = "SELECT * FROM charge 
+                LEFT JOIN contract_charge AS ctc ON ctc.charge_id = charge.id 
+                WHERE ctc.contract_id = :idContract
+        ";
+
+        $statement = $conn->prepare($sql);
+        $resultSet = $statement->executeQuery(['idContract' => $idContract]);
+
+        return $resultSet->fetchAllAssociative();
+    }
+
+    public function getTaxesByContract(Int $idContract)
+    {
+        $conn = $this->getEntityManager()->getConnection();
+
+        $sql = "SELECT * FROM tax 
+                LEFT JOIN contract_tax AS ctx ON ctx.tax_id = tax.id 
+                WHERE ctx.contract_id = :idContract
+        ";
+
+        $statement = $conn->prepare($sql);
+        $resultSet = $statement->executeQuery(['idContract' => $idContract]);
+
+        return $resultSet->fetchAllAssociative();
     }
 
     

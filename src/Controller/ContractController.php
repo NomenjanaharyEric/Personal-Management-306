@@ -52,13 +52,6 @@ class ContractController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $contract = $form->getData();
-            $charges = $contract->getCharges();
-
-            // foreach($charges as $charge ){
-            //     // dd($charge);
-            //     $contract->addCharge($charge);
-            // }
-
             $manager->persist($contract);
             $manager->flush();
 
@@ -109,7 +102,7 @@ class ContractController extends AbstractController
         }
 
         return $this->render('pages/contract/edit.html.twig', [
-            'form' => $form,
+            'form' => $form
         ]);
     }
 
