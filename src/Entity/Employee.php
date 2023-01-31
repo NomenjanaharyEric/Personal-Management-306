@@ -77,6 +77,11 @@ class Employee
     #[ORM\OneToOne(mappedBy: 'owner', cascade: ['persist', 'remove'])]
     private ?Compte $compte = null;
 
+    #[ORM\Column(length: 255)]
+    #[Assert\NotNull()]
+    #[Assert\Length(min:3, max:255)]
+    private ?string $adress = null;
+
     public function __construct()
     {
         $this->dateOfBirth = new \DateTimeImmutable();
@@ -268,6 +273,18 @@ class Employee
         }
 
         $this->compte = $compte;
+
+        return $this;
+    }
+
+    public function getAdress(): ?string
+    {
+        return $this->adress;
+    }
+
+    public function setAdress(string $adress): self
+    {
+        $this->adress = $adress;
 
         return $this;
     }

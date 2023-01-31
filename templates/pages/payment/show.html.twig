@@ -1,9 +1,56 @@
 {% extends "base.html.twig" %}
 
-{% block title %}Gestion peronnel - Paiement salaire{% endblock %}
+{% block title %}Gestion peronnel - Fiche de paie{% endblock %}
 
 {% block body %}
     <div class="container mt-3">
-        <h1>Bulletin de paie</h1>
+        <h3>Bulletin de paie</h3>
+        <div class="row p-2 border">
+            <div class="col-md-6">
+                <h6><strong>Region Amoron'i Mania</strong></h6>
+                <h6> Maison Orange Antamponivinany </h6>
+                <h6> 306 - Ambositra </h6>
+            
+            </div>
+            
+            <div class="col-md-6 border">
+                <h6><strong> {{ employee.name }} </strong> </h6>
+                <h6><strong> {{ employee.lastname }}</strong> </h6>
+                <h6> {{ employee.adress }}</h6>
+                </br>
+                <h6>Emploi : {{ job.title }} </h6>
+                <h6>Heure payées : {{ job.workHours }} </h6>
+            </div>
+            <div class=" col-md-12 mt-2">
+                <h4>Date de paiment ... </h4>
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th> Rubriques</th>
+                            <th> Base</th>
+                            <th> Salaire brute</th>
+                            <th> Part Salarial</th>
+                            <th> Part Employeur</th>
+                            <th> Base part Employer</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% set totalCharge = 0 %}
+                        {% for charge in charges %}
+                            <tr>
+                                <td> {{ charge.title }} </td>
+                                <td> {{ (  charge.part_salarial * job.baseSalary) | number_format(2, '.', ',') }} </td>
+                                <td> {{ job.baseSalary | number_format(2, '.', ',') }} </td>
+                                <td> {{ charge.part_salarial | number_format(2, '.', ',') }} </td>
+                                <td> {{ charge.employer_contribution | number_format(2, '.', ',') }} </td>
+                                <td> {{ (charge.employer_contribution * job.baseSalary ) | number_format(2, '.', ',') }} </td>
+                            </tr>
+                            {% set totalCharge = (charge.part_salarial * job.baseSalary) + totalCharge %}
+                        {% endfor %}
+                    </tbody>
+                </table>
+                <p>Total : {{ totalCharge | number_format(2, '.', ',') }} </p>
+            </div>
+        </div>
     </div>
 {% endblock %}

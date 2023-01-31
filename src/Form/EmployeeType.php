@@ -72,6 +72,14 @@ class EmployeeType extends AbstractType
                 "label" => "Sexe",
                 "label_attr" => ["class" => "form-label"]
             ])
+            ->add('adress', TextType::class, [
+                "attr" => [
+                    "class" => "form-control",
+                    "required" => true,
+                ],
+                "label" => "Nationalite",
+                "label_attr" => ["class" => "form-label"]
+            ])
             ->add('nationality', TextType::class , [
                 "attr" => [
                     "class" => "form-control",
