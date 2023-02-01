@@ -4,7 +4,14 @@
 
 {% block body %}
     <div class="container mt-4">
-        <h1>Modification Service</h1>
-        {{ form(form) }}
+        <div class="row align-items-center align-self-center">
+            <div class="col-md-6">
+                <h1>Modification Service</h1>
+                {{ form(form) }}
+            </div>
+            <div class="col-md-6">
+                <img src="{{ asset("images/service.png") }}" class="d-block mx-lg-auto img-fluid" alt="service">
+            </div>
+        </div>
     </div>
 {% endblock %}

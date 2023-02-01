@@ -27,7 +27,7 @@
                     <th scope="row">{{ service.id }}</th>
                     <td>{{ service.department }}</td>
                     <td>{{ service.name }}</td>
-                    <td>{{ service.createdAt | date('d-m-Y') }}</td>
+                    <td>{{ service.createdAt | format_datetime('full','none', locale="fr") }}</td>
                     <td class="d-flex justify-content-center">
                         <a href="{{ path('app_update_service', { id: service.id }) }}" class="m-1 btn btn-dark">Modifier</a>
                         <a href="{{ path('app_delete_service', { id: service.id }) }}" class="m-1 btn btn-warning">Supprimer</a>
