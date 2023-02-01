@@ -14,9 +14,13 @@
               Cette application permet d'enregistrer dans la base de donnée toutes informations conçernant les personnels.
               Suivi de paiement de salaire, CNAPS, IRS et autre charge obligatoire de chaque personnel.
           </p>
-          <div class="d-grid gap-2 d-md-flex justify-content-md-start">
-            <a href="{{ path('app_login') }}" class="btn btn-primary btn-lg px-4 me-md-2">Se connecter</a>
-          </div>
+          
+          {% if app.user is same as null %}
+            <div class="d-grid gap-2 d-md-flex justify-content-md-start">
+              <a href="{{ path('app_login') }}" class="btn btn-primary btn-lg px-4 me-md-2">Se connecter</a>
+            </div>
+          {% endif %}
+          
         </div>
       </div>
   </div>

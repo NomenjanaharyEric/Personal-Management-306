@@ -4,39 +4,42 @@
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
-    <div class="collapse navbar-collapse" id="navbarColor01">
-      <ul class="navbar-nav me-auto">
-        <li class="nav-item">
-          <a class="nav-link" href="{{ path("app_department") }}">Departements</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="{{ path('app_service') }}">Services</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="{{ path('app_job') }}">Postes</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="{{ path('app_employee') }}">Employées</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="{{ path('app_contract_index') }}">Contrats</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="{{ path('app_charge') }}">Charges</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="{{ path('app_tax') }}">Taxes</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="{{ path('app_compte') }}">Comptes</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="{{ path('app_payment') }}">Paiements</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">Statistiques</a>
-        </li>
-      </ul>
-    </div>
+
+    {% if app.user %}
+      <div class="collapse navbar-collapse" id="navbarColor01">
+        <ul class="navbar-nav me-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="{{ path("app_department") }}">Departements</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{{ path('app_service') }}">Services</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{{ path('app_job') }}">Postes</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{{ path('app_employee') }}">Employées</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{{ path('app_contract_index') }}">Contrats</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{{ path('app_charge') }}">Charges</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{{ path('app_tax') }}">Taxes</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{{ path('app_compte') }}">Comptes</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{{ path('app_payment') }}">Paiements</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Statistiques</a>
+          </li>
+        </ul>
+      </div>
+    {% endif %}
   </div>
 </nav>
