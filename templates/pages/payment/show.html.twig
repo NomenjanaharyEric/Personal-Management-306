@@ -5,7 +5,7 @@
 {% block body %}
     <div class="container mt-3">
         <h3>Bulletin de paie</h3>
-        <div class="row p-2 border">
+        <div class="row p-2 border mb-3">
             <div class="col-md-6">
                 <h6><strong>Region Amoron'i Mania</strong></h6>
                 <h6> Maison Orange Antamponivinany </h6>
@@ -22,7 +22,7 @@
                 <h6>Heure payées : {{ job.workHours }} </h6>
             </div>
             <div class=" col-md-12 mt-2">
-                <table class="table table-bordered">
+                <table class="table table-bordered caption-top">
                     <thead>
                         <tr>
                             <th> Rubriques</th>
@@ -34,31 +34,72 @@
                         </tr>
                     </thead>
                     <tbody>
-                        {% set totalCharge = 0 %}
+                        {% set totalCharges = 0 %}
+                        {% set totalTaxes = 0 %}
+                        {% set totalPartSalarials = 0 %}
+                        {% set totalTaxesPercentages = 0 %}
+                        {% set totalPartEmployers = 0 %}
+                        {% set totalBaseEmployers = 0 %}
+                        <tr class="table-active">
+                            <td colspan="6" ><strong>Charges</strong></td>
+                        </tr>
                         {% for charge in charges %}
                             <tr>
                                 <td> {{ charge.title }} </td>
-                                <td> {{ (  charge.part_salarial * job.baseSalary) | number_format(2, '.', ',') }} </td>
-                                <td> {{ job.baseSalary | number_format(2, '.', ',') }} </td>
-                                <td> {{ charge.part_salarial | number_format(2, '.', ',') }} </td>
-                                <td> {{ charge.employer_contribution | number_format(2, '.', ',') }} </td>
-                                <td> {{ (charge.employer_contribution * job.baseSalary ) | number_format(2, '.', ',') }} </td>
+                                <td> {{ (  charge.part_salarial * job.baseSalary) | number_format(2, ',', '.') }} </td>
+                                <td> {{ job.baseSalary | number_format(2, ',', '.') }} </td>
+                                <td> {{ charge.part_salarial | number_format(2, ',', '.') }} </td>
+                                <td> {{ charge.employer_contribution | number_format(2, ',', '.') }} </td>
+                                <td> {{ (charge.employer_contribution * job.baseSalary ) | number_format(2, ',', '.') }} </td>
                             </tr>
-                            {% set totalCharge = (charge.part_salarial * job.baseSalary) + totalCharge %}
+                            {% set totalCharges = (charge.part_salarial * job.baseSalary) + totalCharges %}
+                            {% set totalPartSalarials = charge.part_salarial  + totalPartSalarials %}
+                            {% set totalPartEmployers = charge.employer_contribution  + totalPartEmployers %}
+                            {% set totalBaseEmployers = (charge.employer_contribution * job.baseSalary )  + totalBaseEmployers %}
                         {% endfor %}
-                        
+                            <tr class="table-light">
+                                <td>Total</td>
+                                <td> {{ totalCharges | number_format(2, ',', '.') }} </td>
+                                <td></td>
+                                <td> {{ totalPartSalarials | number_format(2, ',', '.') }} </td>
+                                <td> {{ totalPartEmployers | number_format(2, ',', '.') }} </td>
+                                <td> {{ totalBaseEmployers | number_format(2, ',', '.') }} </td>
+                            </tr>
+                        <tr class="table-active">
+                            <td colspan="6" ><strong>Taxes</strong></td>
+                        </tr>
                         {% for taxe in taxes %}
                             <tr>
                                 <td> {{ taxe.title }} </td>
-                                <td> {{ (  taxe.percentage * job.baseSalary) | number_format(2, '.', ',') }} </td>
-                                <td> {{ job.baseSalary | number_format(2, '.', ',') }} </td>
-                                <td> {{ taxe.percentage | number_format(2, '.', ',') }} </td>
+                                <td> {{ (  taxe.percentage * job.baseSalary) | number_format(2, ',', '.') }} </td>
+                                <td> {{ job.baseSalary | number_format(2, ',', '.') }} </td>
+                                <td> {{ taxe.percentage | number_format(2, ',', '.') }} </td>
+                                <td></td>
+                                <td></td>
                             </tr>
-                            
+                            {% set totalTaxes = (taxe.percentage * job.baseSalary) + totalTaxes %}
+                            {% set totalTaxesPercentages = taxe.percentage + totalTaxesPercentages %}
                         {% endfor %}
+                            <tr class="table-light">
+                                <td>Total</td>    
+                                <td>{{ totalTaxes | number_format(2, ',', '.') }}</td>
+                                <td></td>
+                                <td> {{ totalTaxesPercentages }} </td>
+                            </tr>
+
+                            <tr class="table-active">
+                                <td ><strong> Total Charges + Taxes</strong></td>
+                                <td > {{ (totalCharges + totalTaxes) | number_format(2, ',', '.') }} </td>
+                                <td> {{ job.baseSalary | number_format(2, ',', '.') }} </td>
+                                <td> {{ (totalPartSalarials + totalTaxesPercentages) * 100 }} % </td>
+                                <td> {{ totalPartEmployers * 100 }} % </td>
+                                <td> {{ (totalPartEmployers * job.baseSalary) | number_format(2, ',', '.') }} </td>
+                            </tr>
                     </tbody>
                 </table>
-                <p>Total : {{ totalCharge | number_format(2, '.', ',') }} </p>
+                <p><strong> Total Montant à verser sur l'employeur : </strong> <span> {{ (job.baseSalary - (totalCharges + totalTaxes)) | number_format(2, ',', '.')  }} </span> Ariary </p>
+                <a href="#" class="btn btn-primary">Effectuer la Transaction</a>
+                <a href="#" class="btn btn-info">exporter PDF</a>
             </div>
         </div>
     </div>
