@@ -336,7 +336,7 @@ class Employee
         return $this->photo;
     }
 
-    public function setPhoto(string $photo): self
+    public function setPhoto(string $photo = null): self
     {
         $this->photo = $photo;
 

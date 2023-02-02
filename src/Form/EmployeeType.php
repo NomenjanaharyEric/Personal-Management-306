@@ -23,7 +23,9 @@ class EmployeeType extends AbstractType
     {
         $builder
             ->add('imageFile', VichImageType::class, [
-                "label" => "Photo"
+                "label" => "Photo",
+                "label_attr" => ["class" => "form-label"],
+                "attr" => ["required" => false ],
             ])
             ->add('matricule', TextType::class, [
                 "attr" => [

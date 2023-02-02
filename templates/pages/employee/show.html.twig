@@ -3,38 +3,65 @@
 {% block title %}Gestion Personnel - Employée{% endblock %}
 
 {% block body %}
-    <div class="container-fluid mt-3">
-        <h1>Employée Information</h1>
-
-        <table class=" mt-4 table table-hover table-bordered">
-            <thead>
-                <tr>
-                <th scope="col">Matricule</th>
-                <th scope="col">Nom</th>
-                <th scope="col">Prenom</th>
-                <th scope="col">Date de Naissance</th>
-                <th scope="col">Numero CIN</th>
-                <th scope="col">Sexe</th>
-                <th scope="col">Nationalité</th>
-                <th scope="col">Status Familiale</th>
-                <th scope="col">Titre</th>
-                <th scope="col">Phone</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                <th scope="row">{{ employee.matricule }}</th>
-                <td>{{ employee.name }}</td>
-                <td>{{ employee.lastname }}</td>
-                <td>{{ employee.dateOfBirth | format_datetime('full', 'none', locale='fr') }}</td>
-                <td>{{ employee.cin }}</td>
-                <td>{{ employee.sexe ? "Homme" : "Femme" }}</td>
-                <td>{{ employee.nationality }}</td>
-                <td>{{ employee.familyStatus }}</td>
-                <td>{{ employee.job }}</td>
-                <td>{{ employee.phone }}</td>
-                </tr>
-            </tbody>
-        </table>
+    <div class="container mt-3">
+        <div class="row">
+            <div class="col-md-4">
+                <img src="{{ asset("images/employees/" ~ employee.photo ) }}" class="img-fluid img-thumbnail" alt=""/>
+            </div>
+            <div class="col-md-8">
+                <table class="table table-striped border rounded">
+                    <tbody>
+                        <tr>
+                            <td>Matricule<td>
+                            <td><strong> {{ employee.matricule }} </strong></td>
+                        </tr>
+                        <tr>
+                            <td>Poste Occupé<td>
+                            <td><span class="badge bg-info"> {{ employee.job }} </span></td>
+                        </tr>
+                        <tr>
+                            <td>Nom<td>
+                            <td><strong> {{ employee.name }} </strong></td>
+                        </tr>
+                        <tr>
+                            <td>Prenom<td>
+                            <td><strong> {{ employee.lastname }} </strong></td>
+                        </tr>
+                        <tr>
+                            <td>Date de Naissance<td>
+                            <td><strong> {{ employee.dateOfBirth | format_datetime('full','none', locale="fr") }} </strong></td>
+                        </tr>
+                        <tr>
+                            <td>Sexe<td>
+                            <td><strong> {{ employee.sexe == 1 ? "Homme" : "Femme" }} </strong></td>
+                        </tr>
+                        <tr>
+                            <td>Adresse<td>
+                            <td><strong> {{ employee.adress }} </strong></td>
+                        </tr>
+                        <tr>
+                            <td>Nationalité<td>
+                            <td><strong> {{ employee.nationality }} </strong></td>
+                        </tr>
+                        <tr>
+                            <td>Carte d'Identité Nationale<td>
+                            <td><strong> {{ employee.cin }} </strong></td>
+                        </tr>
+                        <tr>
+                            <td>Situation Familiale<td>
+                            <td><strong> {{ employee.familyStatus }} </strong></td>
+                        </tr>
+                        <tr>
+                            <td>Telephone<td>
+                            <td><strong> {{ employee.phone }} </strong></td>
+                        </tr>
+                        <tr>
+                            <td>Email<td>
+                            <td><strong> {{ employee.email }} </strong></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
     </div>
 {% endblock %}
