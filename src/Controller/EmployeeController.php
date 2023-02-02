@@ -37,6 +37,12 @@ class EmployeeController extends AbstractController
     }
 
     #[Route(path: "/employee/show-{id}", name: "app_show_employee", methods:["GET"])]
+    /**
+     * This Methode Allow Us To Show Employee Information
+     *
+     * @param Employee $employee
+     * @return Response
+     */
     public function show(Employee $employee):Response
     {
         return $this->render("/pages/employee/show.html.twig", [

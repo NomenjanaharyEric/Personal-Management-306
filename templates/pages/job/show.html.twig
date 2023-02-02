@@ -5,9 +5,26 @@
 {% block body %}
     <div class="container mt-3">
         <h1>Poste Information</h1>
-        <p> Titre : <strong>{{ job.title }}</strong> </p>
-        <p> Heure de travail par mois : <strong>{{ job.workHours }}</strong> </p>
-        <p> Salaire de base : <strong>{{ job.baseSalary }}</strong> </p>
-        <p> Description : <strong>{{ job.description }}</strong> </p>
+        <a href=" {{ path('app_job') }} ">Retour</a>
+        <table class="table table-striped">
+            <tbody>
+                <tr>
+                    <td>Titre</td>
+                    <td><strong>{{ job.title }}</strong></td>
+                </tr>
+                <tr>
+                    <td>Heure de Travail par mois</td>
+                    <td><strong>{{ job.workHours }} heures</strong> </td>
+                </tr>
+                <tr>
+                    <td>Salaire de Base</td>
+                    <td><strong>{{ job.baseSalary | number_format(2, '.', ',') }} Ariary</strong></td>
+                </tr>
+                <tr>
+                    <td>Description</td>
+                    <td><strong>{{ job.description }}</strong></td>
+                </tr>
+            </tbody>
+        </table>
     </div>
 {% endblock %}

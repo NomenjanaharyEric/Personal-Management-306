@@ -7,6 +7,7 @@
         <div class="row">
             <div class="col-md-4">
                 <img src="{{ asset("images/employees/" ~ employee.photo ) }}" class="img-fluid img-thumbnail" alt=""/>
+                <a href="{{ path('app_employee') }}">Retour</a>
             </div>
             <div class="col-md-8">
                 <table class="table table-striped border rounded">
@@ -61,6 +62,7 @@
                         </tr>
                     </tbody>
                 </table>
+                <a class="btn btn-primary" href="{{ path('app_update_employee', {"id": employee.id }) }}">Modifier</a>
             </div>
         </div>
     </div>

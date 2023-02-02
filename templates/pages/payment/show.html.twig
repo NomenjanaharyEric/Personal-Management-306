@@ -13,7 +13,7 @@
             
             </div>
             
-            <div class="col-md-6 border">
+            <div class="col-md-6 border p-2">
                 <h6><strong> {{ employee.name }} </strong> </h6>
                 <h6><strong> {{ employee.lastname }}</strong> </h6>
                 <h6> {{ employee.adress }}</h6>
@@ -22,7 +22,6 @@
                 <h6>Heure payées : {{ job.workHours }} </h6>
             </div>
             <div class=" col-md-12 mt-2">
-                <h4>Date de paiment ... </h4>
                 <table class="table table-bordered">
                     <thead>
                         <tr>
@@ -55,6 +54,7 @@
                                 <td> {{ job.baseSalary | number_format(2, '.', ',') }} </td>
                                 <td> {{ taxe.percentage | number_format(2, '.', ',') }} </td>
                             </tr>
+                            
                         {% endfor %}
                     </tbody>
                 </table>
