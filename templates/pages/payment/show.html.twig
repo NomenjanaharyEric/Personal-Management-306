@@ -47,6 +47,15 @@
                             </tr>
                             {% set totalCharge = (charge.part_salarial * job.baseSalary) + totalCharge %}
                         {% endfor %}
+                        
+                        {% for taxe in taxes %}
+                            <tr>
+                                <td> {{ taxe.title }} </td>
+                                <td> {{ (  taxe.percentage * job.baseSalary) | number_format(2, '.', ',') }} </td>
+                                <td> {{ job.baseSalary | number_format(2, '.', ',') }} </td>
+                                <td> {{ taxe.percentage | number_format(2, '.', ',') }} </td>
+                            </tr>
+                        {% endfor %}
                     </tbody>
                 </table>
                 <p>Total : {{ totalCharge | number_format(2, '.', ',') }} </p>
